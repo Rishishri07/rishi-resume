@@ -1,0 +1,213 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-icon class="menu-btn" (click)="drawer.toggle()" aria-label="Side nav toggle icon">menu</mat-icon>
+  <mat-drawer #drawer [opened]="screenWidth > 768" [mode]="screenWidth > 768 ? 'side' : 'over'">
+    <div class="img-profile-photo-frame">
+      <img src="/assets/profile.jpg" class="img-profile-photo">
+      <a mat-icon-button class="btn-primary" href="/assets/rishi_shri_07_01_1996.pdf" target="_blank">
+        <div class="name-cont" #nameText>
+          <span class="name-text">Rishi Shrivastava</span>
+        </div>
+      </a>
+    </div>
+    <mat-nav-list>
+      <mat-list-item class="sidenav-link" (click)="scrollToView(home)">
+        <mat-icon mat-list-icon class="side-menu-icon" [ngClass]="{'active': currentActive === 1}">home</mat-icon>
+        <span class="menu-title">Home</span>
+      </mat-list-item>
+      <mat-list-item class="sidenav-link" (click)="scrollToView(about)">
+        <mat-icon mat-list-icon class="side-menu-icon" [ngClass]="{'active': currentActive === 2}">person</mat-icon>
+        <span class="menu-title">About</span>
+      </mat-list-item>
+      <mat-list-item class="sidenav-link" (click)="scrollToView(skills)">
+        <mat-icon mat-list-icon class="side-menu-icon"  [ngClass]="{'active': currentActive === 3}">code</mat-icon>
+        <span class="menu-title">Skills</span>
+      </mat-list-item>
+      <mat-list-item class="sidenav-link" (click)="scrollToView(workex)">
+        <mat-icon mat-list-icon class="side-menu-icon" [ngClass]="{'active': currentActive === 4}">work</mat-icon>
+        <span class="menu-title">Work Experience</span>
+      </mat-list-item>
+      <mat-list-item class="sidenav-link" (click)="scrollToView(contact)">
+        <mat-icon mat-list-icon class="side-menu-icon" [ngClass]="{'active': currentActive === 5}">email</mat-icon>
+        <span class="menu-title">Contact</span>
+      </mat-list-item>
+
+      <div class="soc-box">
+        <div class="social-media">
+        <a style="text-align: center; display:block; margin: 10% 0 0 0;" target="_blank"
+           href="https://www.linkedin.com/in/rishi-shrivastava-77a683127/">
+          <img src="/assets/linkedin.png" alt="image" />
+        </a>
+        </div>
+        <div class="social-media">
+        <a style="text-align: center; display:block; margin: 10% 0 0 0;" target="_blank" href="https://github.com/">
+          <img src="/assets/github.png" alt="image" />
+        </a>
+        </div>
+      </div>
+    </mat-nav-list>
+  </mat-drawer>
+
+<div class="child-container" #home>
+  <div class="logo" style="background-image: url('assets/banner-image.jpg')"></div>
+  <h1 class="h-title" data-aos="fade-right" data-aos-delay="200"> <span> Hello, I’m <strong>Rishi Shrivastava</strong>, Full Stack Developer
+      <br> Based in Pune, India. </span>
+  </h1>
+  <!-- <div class="h-subtitles-ready">
+    <ngtypewriter [StringList]='list' [speed]='1000'></ngtypewriter>
+  </div> -->
+  <button class="navigation-down-btn" (click)="scrollToView(about)"><mat-icon class="side-menu-icon icon-size bounce">arrow_forward_ios</mat-icon></button>
+</div>
+<div class="child-container" #about><h2 class="title-name">About</h2>
+  <p class="about-para">My ambition is to reach the very top of my profession and to work with other leading developers in this field.
+    On a personal level, I am able to both give and take feedback.
+     Furthermore, I am committed to constantly improving myself by learning new technologies and frameworks.</p>
+  <div class="info-container" data-aos="fade-right">
+    <div class="child-info-container">
+      <div style="margin-right: 10%">
+        <ul>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>Birthday:</strong> 7 January 1996</li>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>Phone:</strong> +91-8962162496</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <ul>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>City:</strong> Hyderabad, India</li>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>Email:</strong> rishishri07@gmail.com</li>
+        </ul>
+
+      </div>
+    </div>
+    <p style="margin-top: 5%" class="about-para">
+      Develop and maintain frontend & backend solutions using cutting edge technologies and products.
+      Ability to write code that will add utility to everything.
+      Experienced in building, testing and troubleshooting Angular, Microservices and RESTful APIs.
+    </p>
+  </div>
+  <button class="navigation-down-btn about-btn" (click)="scrollToView(skills)"><mat-icon class="side-menu-icon icon-size bounce">arrow_forward_ios</mat-icon></button>
+</div>
+<div class="child-container2" style="overflow: auto" [ngStyle]="{'min-height.px': screenHeight}" #skills>
+  <h2 class="title-name">Skills</h2>
+  <mat-grid-list cols="2" rowHeight="48px" data-aos="fade-up" data-aos-delay="200">
+    <mat-grid-tile *ngFor="let s of sk; let i = index">
+      <div class="fruit">
+        <span style="font-size: 1.2em">{{s.name}}</span>
+        <mat-progress-bar mode="determinate" value="{{progressbarValue[i]}}"></mat-progress-bar>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <button class="navigation-down-btn about-btn" (click)="scrollToView(workex)"><mat-icon class="side-menu-icon icon-size bounce">arrow_forward_ios</mat-icon></button>
+</div>
+<div class="work-container" #workex><h2 class="title-name">Work Experience</h2>
+  <div class="section-title">
+    <p>To be involved in work where I can utilize my skills and creatively involved with system that effectively contributes to the growth of organization.</p>
+  </div>
+  <div class="resume-container">
+    <div class="resume-child-container" style="margin-left: 2%" data-aos="fade-up">
+      <h3 class="resume-title">Summary</h3>
+      <div class="resume-item">
+        <h4>Rishi Shrivastava</h4>
+        <li style="word-break: break-all">Hyderabad, India</li>
+        <li style="word-break: break-all">+91 8962162496</li>
+        <li style="word-break: break-all">rishishri07@gmail.com</li>
+      </div>
+      <h3 class="resume-title">Projects</h3>
+
+      <div class="resume-item">
+        <h3>Lan Chat Server</h3>
+        <p><em>Chat with your friends using lan connection.</em></p>
+        <h4>Technologies:</h4> <p>Java, HTML, CSS</p>
+      </div>
+
+      <div class="resume-item">
+        <h3>Employee Leave Management System</h3>
+        <p><em>A website where employees can apply for leave, see their leave balance and their respective leadership can approve or deny the leave requests.</em></p>
+        <h4>Technologies:</h4> <p>Angular, HTML, CSS, Git, Java, Spring Boot, MySQL</p>
+        <h4>GitHub</h4>
+        <a href="https://github.com/Rishishri07/Leave-Management-System" target="_blank">Source Code</a>
+      </div>
+
+      <div class="resume-item">
+        <h3>Uniquard</h3>
+        <p><em>Online POS system where user can keep their customers data.</em></p>
+        <h4>Technologies:</h4> <p>Angular, HTML, CSS, Git, Java, Spring Boot</p>
+        <h4>GitHub</h4>
+        <a href="https://bitbucket.org/Rishishri07/uniquard-angular/" target="_blank">Source Code</a>
+      </div>
+
+    </div>
+    <div class="resume-child-container" style="margin-left: 2%" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="resume-title">Professional Experience</h3>
+      <div class="resume-item">
+        <h4>Hexaware Technologies</h4>
+        <h5>Nov 2017 - Sep 2019</h5>
+        <p><em>Chennai, India </em></p>
+        <ul class="roles-details">
+          <li>Created API using Rest web services in MVC architecture</li>
+          <li>Experience in implementing Spring Boot framework</li>
+          <li>Experience in upgrading the system as per the requirement of client with coordination of R&D team</li>
+          <li>Experience in testing for the new features release and writing Junit test cases</li>
+          <li>Designed responsive web design with Angular 8, material design, HTML5/CSS taking Figma screens provided by client into reference</li>
+          <li>Clear understanding of Agile environment & Software Development Life Cycles (SDLC)</li>
+          <li>Collaborating with developers across multiple teams to develop and build consensus on common reusable application components</li>
+          <li>I have been part of code refactor team where I have optimized the existing code to make it more understandable and reusable</li>
+        </ul>
+        <h4>Technologies:</h4> <p>Angular, HTML, CSS, Git, Java, Spring Boot, Restful Web services.</p>
+      </div>
+      <div class="resume-item">
+        <h4>Deloitte India Pvt Ltd</h4>
+        <h5>Oct 2019 - Present</h5>
+        <p><em>Hyderabad, India</em></p>
+        <ul class="roles-details">
+          <li>Working on the frontend of the website, to make the application attractive to the user</li>
+          <li>Implementing new features, tests, refactoring old and redundant code, all independently</li>
+          <li>Wrote highly reusable code for to increase performance of the website</li>
+          <li>Made complete Billing module to charge customers on the basis of the number of active users</li>
+          <li>Helped other teams in the project to solve their complex problems in UI</li>
+          <li>Worked as SME in the project</li>
+          <li>Worked closely with the clients on daily basis to get the requirements and develop the project</li>
+        </ul>
+        <h4>Technologies:</h4> <p>Angular, HTML, CSS, Git, Patternlabs, Tridion, JavaScript, Jquery, Gulp, Babel.</p>
+      </div>
+    </div>
+  </div>
+  <button class="navigation-down-btn about-btn" (click)="scrollToView(contact)"><mat-icon class="side-menu-icon icon-size bounce">arrow_forward_ios</mat-icon></button>
+</div>
+<div class="child-container2" [ngStyle]="{'height.px': screenHeight}" #contact>
+  <h2 class="title-name">Contact</h2>
+  <div class="card-container">
+  <mat-card>
+    <div class="info">
+      <div class="address">
+        <mat-icon class="info-icon">location_on</mat-icon>
+        <h4>Location:</h4>
+        <p>Kondapur, Hyderabad, 500084 </p>
+      </div>
+
+      <div class="email" (click)="composeEmail()">
+        <mat-icon class="info-icon">email</mat-icon>
+        <h4>Email:</h4>
+        <p>rishishri07@gmail.com</p>
+      </div>
+
+      <div class="phone" (click)="openDialler()">
+        <mat-icon class="info-icon">phone</mat-icon>
+        <h4>Call:</h4>
+        <p>+91 8962 162496</p>
+      </div>
+
+<!--      <iframe style="width: 100%; border:0;"-->
+<!--              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1944.4669133899606!2d77.63495265816465!3d12.911974612113122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae14921b535b45%3A0x5a3a81ae87a52a38!2s23%2C%2018th%20Cross%20Rd%2C%20Sector%207%2C%20HSR%20Layout%2C%20Bengaluru%2C%20Karnataka%20560102!5e0!3m2!1sen!2sin!4v1588943696227!5m2!1sen!2sin"-->
+<!--              width="380" height="300" frameborder="0"-->
+<!--              allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>-->
+      <iframe
+        style="width: 100%; border:0;"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30447.444331653547!2d78.33892537892015!3d17.463038272016696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93cab98d9ebb%3A0x36632972d0504e8e!2sTulip%20Le%20Park%2C%20Anand%20Nagar%20Colony%2C%20Raghavendra%20Colony%2C%20Kondapur%2C%20Telangana%20500084!5e0!3m2!1sen!2sin!4v1618835001171!5m2!1sen!2sin"
+        width="380" height="300" frameborder="0"
+        allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+  </mat-card>
+  </div>
+</div>
+<app-scroll-to-top></app-scroll-to-top>
+
+</mat-drawer-container>
