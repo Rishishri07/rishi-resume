@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rishi-shrivastava",
+            "outputPath": "docs/rishi-shrivastava",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
