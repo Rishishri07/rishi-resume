@@ -11,6 +11,7 @@ import {
 import {interval, Subject, timer} from 'rxjs';
 import {MatSidenav} from '@angular/material/sidenav';
 import {takeUntil} from 'rxjs/operators';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-home',
@@ -91,7 +92,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public toggleMenu(event: any): void {
 
   }
-  ngOnInit(): void { const statustext$ = this.refreshInterval$; }
+  ngOnInit(): void {
+    AOS.init({disable: 'mobile'});//AOS - 2
+    AOS.refresh();//refresh method is called on window resize and so on, as it doesn't require to build new store with AOS elements and should be as light as possible.
+  }
 
   ngOnDestroy(): void {
     this.killTrigger.next();
