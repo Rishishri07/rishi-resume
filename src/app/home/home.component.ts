@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public list = ['I develop cool websites', 'I develop Responsive Website'];
   public sk = [
     { name: 'Angular', level: 80 }, { name: 'HTML5', level: 80 }, { name: 'SCSS', level: 80 },
+    { name: 'NGRX', level: 70 },
     { name: 'JavaScript', level: 70 }, { name: 'Nest JS', level: 70 }, { name: 'AWS', level: 40 },
     { name: 'MySQL', level: 40 }, { name: 'Karma', level: 70 }, { name: 'Jest', level: 80 },
     { name: 'JIRA ', level: 90 }, { name: 'GIT ', level: 90 }, { name: 'IntelliJ ', level: 95 },
@@ -57,14 +58,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public aboutOffset: any = 0;
   public skillsOffset: any = 0;
   public workekOffset: any = 0;
-  public contactOffset: any = 0;
+  // public contactOffset: any = 0;
 
   progressbarValue = Array<number>();
   curSec = 0;
   public scroll = 0;
   public screenWidth = 0;
   public screenHeight = 0;
-  public menuColor: string = '';
+  public isDarkMenu: boolean = false;
   public textState: string = 'hidden';
   public showName = true;
   private killTrigger: Subject<void> = new Subject();
@@ -125,25 +126,26 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const max = document.documentElement.scrollHeight;
     if (window.pageYOffset >= this.homeOffset && window.pageYOffset < this.aboutOffset) {
       this.currentActive = 1;
-      this.menuColor = '';
+      this.isDarkMenu = true;
     } else if (window.pageYOffset >= this.aboutOffset && window.pageYOffset < this.skillsOffset) {
       this.currentActive = 2;
-      this.menuColor = '';
+      this.isDarkMenu = true;
     } else if (window.pageYOffset >= this.skillsOffset && window.pageYOffset < this.workekOffset) {
       this.currentActive = 3;
-      this.menuColor = this.getMenuColor();
-    } else if (window.pageYOffset >= this.workekOffset && window.pageYOffset < this.contactOffset) {
+      this.isDarkMenu = false;
+    } else if (window.pageYOffset >= this.workekOffset) {
       this.currentActive = 4;
-      this.menuColor = '';
-    } else if (window.pageYOffset >= this.contactOffset) {
-      this.currentActive = 5;
-      this.menuColor = this.getMenuColor();
-      return;
+      this.isDarkMenu = true;
     }
-    if (pos.toString().split('.')[0] === max.toString().split('.')[0] )   {
-      this.currentActive = 5;
-      this.menuColor = this.getMenuColor();
-    }
+    // else if (window.pageYOffset >= this.contactOffset) {
+    //   this.currentActive = 5;
+    //   this.isDarkMenu = false;
+    //   return;
+    // }
+    // if (pos.toString().split('.')[0] === max.toString().split('.')[0] )   {
+    //   this.currentActive = 5;
+    //   this.isDarkMenu = false;
+    // }
   }
 
   ngAfterViewInit(): void {
@@ -151,7 +153,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.aboutOffset = this.aboutElement?.nativeElement.offsetTop;
     this.skillsOffset = this.skillsElement?.nativeElement.offsetTop;
     this.workekOffset = this.workexElement?.nativeElement.offsetTop;
-    this.contactOffset = this.contactElement?.nativeElement.offsetTop;
+    // this.contactOffset = this.contactElement?.nativeElement.offsetTop;
     setTimeout( () => {
       this.textState = 'shown';
     }, 200);
@@ -180,7 +182,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   AOS.init({disable: 'mobile'});//AOS - 2
   AOS.refresh();
   }
-  private getMenuColor(): string {
+  private getMenuColor(isDarkMenu: boolean): string {
     return 'menu-color';
   }
 }

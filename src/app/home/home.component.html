@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container" autosize>
-    <mat-icon class="menu-btn" (click)="drawer.toggle()" aria-label="Side nav toggle icon">menu</mat-icon>
+    <mat-icon class="menu-btn"  [ngStyle]="!isDarkMenu ? {'color': '#202020'} : {'color': '#fff'}" (click)="drawer.toggle()" aria-label="Side nav toggle icon">menu</mat-icon>
   <mat-drawer #drawer [opened]="screenWidth > 768" [mode]="screenWidth > 768 ? 'side' : 'over'">
     <div class="img-profile-photo-frame">
       <img src="/assets/profile.jpg" class="img-profile-photo">
@@ -26,10 +26,10 @@
         <mat-icon mat-list-icon class="side-menu-icon" [ngClass]="{'active': currentActive === 4}">work</mat-icon>
         <span class="menu-title">Work Experience</span>
       </mat-list-item>
-      <mat-list-item class="sidenav-link" (click)="scrollToView(contact)">
+      <!-- <mat-list-item class="sidenav-link" (click)="scrollToView(contact)">
         <mat-icon mat-list-icon class="side-menu-icon" [ngClass]="{'active': currentActive === 5}">email</mat-icon>
         <span class="menu-title">Contact</span>
-      </mat-list-item>
+      </mat-list-item> -->
 
       <div class="soc-box">
         <div class="social-media">
@@ -39,7 +39,7 @@
         </a>
         </div>
         <div class="social-media">
-        <a style="text-align: center; display:block; margin: 10% 0 0 0;" target="_blank" href="https://github.com/">
+        <a style="text-align: center; display:block; margin: 10% 0 0 0;" target="_blank" href="https://github.com/Rishishri07">
           <img src="/assets/github.png" alt="image" />
         </a>
         </div>
@@ -49,34 +49,43 @@
 
 <div class="child-container" #home>
   <div class="logo" style="background-image: url('assets/banner-image.jpg')"></div>
-  <h1 *ngIf="screenWidth >= 600" [@myAnimationTrigger]="textState" class="h-title" data-aos="fade-right" data-aos-delay="200"> <span> Hello, I’m <strong>Rishi Shrivastava</strong>, Full Stack Developer
+  <h1 class="h-title"[attr.data-aos]="screenWidth > 768 ? 'fade-right' : null" [attr.data-aos-delay]="screenWidth > 768 ? '200' : null">
+    <span> Hello, I’m <strong>Rishi Shrivastava</strong>, Full Stack Developer
       <br> Based in Pune, India. </span>
   </h1>
 
-  <h1 *ngIf="screenWidth <= 600" class="h-title"> <span> Hello, I’m <strong>Rishi Shrivastava</strong>, Full Stack Developer
-    <br> Based in Pune, India. </span>
-</h1>
   <!-- <div class="h-subtitles-ready">
     <ngtypewriter [StringList]='list' [speed]='1000'></ngtypewriter>
   </div> -->
+  <div class="h-subtitles-ready">
+    <ngx-typed-js [strings]="list" [loop]="true" [typeSpeed]="50"[backSpeed]="10" [showCursor]=false>
+      <h1 class="typing"></h1></ngx-typed-js>
+  </div>
   <button class="navigation-down-btn" (click)="scrollToView(about)"><mat-icon class="side-menu-icon icon-size bounce">expand_more</mat-icon></button>
 </div>
-<div class="child-container" #about><h2 class="title-name">About</h2>
-  <p class="about-para">My ambition is to reach the very top of my profession and to work with other leading developers in this field.
+<div class="child-container" [ngStyle]="screenWidth < 768 ? {'height': 'auto'} : {} " #about><h2 class="title-name">About</h2>
+  <p class="about-para">Passionate Software Engineer with 5+ years of experience in developing web applications and backend systems. Skilled at writing clear, concise code that is easy 
+    to maintain and troubleshoot. Experienced in working with both small and large teams across multiple projects and companies.
+    Able to work independently from remote locations or in office environments as needed by the company.    
+    My ambition is to reach the very top of my profession and to work with other leading developers in this field.
     On a personal level, I am able to both give and take feedback.
-     Furthermore, I am committed to constantly improving myself by learning new technologies and frameworks.</p>
-  <div class="info-container" data-aos="fade-right">
+    Furthermore, I am committed to constantly improving myself by learning new technologies and frameworks.</p>
+  <div class="info-container" [attr.data-aos]="screenWidth > 768 ? 'fade-right' : null">
     <div class="child-info-container">
       <div style="margin-right: 10%">
         <ul>
-          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>Birthday:</strong> 7 January 1996</li>
-          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>Phone:</strong> +91-8962162496</li>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon>
+            <strong>Birthday :</strong><span style="margin-left: 0.5rem">7 January 1996</span></li>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon>
+            <strong>Phone :</strong><span style="margin-left: 0.5rem">+91-8962162496</span></li>
         </ul>
       </div>
       <div class="col-lg-6">
         <ul>
-          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>City:</strong> Pune, India</li>
-          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon><strong>Email:</strong> rishishri07@gmail.com</li>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon>
+            <strong>City :</strong><span style="margin-left: 0.5rem">Pune, India</span></li>
+          <li><mat-icon class="info-icon">arrow_forward_ios</mat-icon>
+            <strong>Email :</strong><span style="margin-left: 0.5rem">rishishri07@gmail.com</span></li>
         </ul>
 
       </div>
@@ -91,7 +100,7 @@
 </div>
 <div class="child-container2" style="overflow: auto" [ngStyle]="{'min-height.px': screenHeight}" #skills>
   <h2 class="title-name">Skills</h2>
-  <mat-grid-list cols="2" rowHeight="48px" data-aos="fade-up" data-aos-delay="200">
+  <mat-grid-list cols="2" rowHeight="48px" [attr.data-aos]="screenWidth > 768 ? 'fade-up' : null" [attr.data-aos-delay]="screenWidth > 768 ? '200' : null">
     <mat-grid-tile *ngFor="let s of sk; let i = index">
       <div class="fruit">
         <span style="font-size: 1.2em">{{s.name}}</span>
@@ -99,14 +108,15 @@
       </div>
     </mat-grid-tile>
   </mat-grid-list>
-  <button class="navigation-down-btn about-btn" (click)="scrollToView(workex)"><mat-icon class="side-menu-icon icon-size bounce">expand_more</mat-icon></button>
+  <button class="navigation-down-btn about-btn" (click)="scrollToView(workex)">
+    <mat-icon style="color: #3f51b5" class="side-menu-icon icon-size bounce">expand_more</mat-icon></button>
 </div>
 <div class="work-container" #workex><h2 class="title-name">Work Experience</h2>
-  <div class="section-title">
+  <!-- <div class="section-title">
     <p>To be involved in work where I can utilize my skills and creatively involved with system that effectively contributes to the growth of organization.</p>
-  </div>
+  </div> -->
   <div class="resume-container">
-    <div class="resume-child-container" style="margin-left: 2%" data-aos="fade-up">
+    <!-- <div class="resume-child-container" style="margin-left: 2%" [attr.data-aos]="screenWidth > 768 ? 'fade-up' : null">
       <h3 class="resume-title">Summary</h3>
       <div class="resume-item">
         <h4>Rishi Shrivastava</h4>
@@ -132,51 +142,73 @@
 
       <div class="resume-item">
         <h3>Uniquard</h3>
-        <p><em>Online POS system where user can keep their customers data.</em></p>
-        <h4>Technologies:</h4> <p>Angular, HTML, CSS, Git, Java, Spring Boot</p>
+        <p><em>An Online POS system is the central hub of your business.
+          It creates the intersection between sales, inventory management, payment processing, and customer management.</em></p>
+        <h4>Technologies:</h4> <p>Angular 8, HTML5, SCSS, Git, Java 8, Spring Boot</p>
         <h4>GitHub</h4>
         <a href="https://bitbucket.org/Rishishri07/uniquard-angular/" target="_blank">Source Code</a>
       </div>
 
-    </div>
-    <div class="resume-child-container" style="margin-left: 2%" data-aos="fade-up" data-aos-delay="100">
+    </div> -->
+    <div class="resume-child-container" style="margin-left: 2%"
+    [attr.data-aos]="screenWidth > 768 ? 'fade-up' : null" [attr.data-aos-delay]="screenWidth > 768 ? '100' : null">
       <h3 class="resume-title">Professional Experience</h3>
       <div class="resume-item">
-        <h4>Hexaware Technologies</h4>
-        <h5>Nov 2017 - Sep 2019</h5>
-        <p><em>Chennai, India </em></p>
+        <h4 style="color: #FFDF6C; font-weight: 500;">Deloitte Consulting India Pvt Ltd</h4>
+        <h5>Oct 2019 - Present</h5>
+        <p>Pune, India</p>
+        <p style="font-weight: 500">Transamerica (AX-IX)</p>
         <ul class="roles-details">
-          <li>Created API using Rest web services in MVC architecture</li>
-          <li>Experience in implementing Spring Boot framework</li>
-          <li>Experience in upgrading the system as per the requirement of client with coordination of R&D team</li>
-          <li>Experience in testing for the new features release and writing Junit test cases</li>
-          <li>Designed responsive web design with Angular 8, material design, HTML5/CSS taking Figma screens provided by client into reference</li>
-          <li>Clear understanding of Agile environment & Software Development Life Cycles (SDLC)</li>
-          <li>Collaborating with developers across multiple teams to develop and build consensus on common reusable application components</li>
-          <li>I have been part of code refactor team where I have optimized the existing code to make it more understandable and reusable</li>
+          <li>Successfully upgraded whole application from Angular 10 to 14</li>
+          <li>Developed and maintained reusable Angular components, used in 3 different Application, reducing development effort by 50%</li>
+          <li>Achieved efficiency improvements through code optimization and implemented responsive design practices for enhanced user engagement</li>
+          <li>Worked as part of a delivery team, collaborated with others to understand requirements, analysis and refine stories</li>
+          <li>Designed solutions, implemented, tested, and supported them in production</li>
+          <li>Fixed critical UI issues within the deadlines and delivered them with quality</li>
+          <li>Implemented NGRX state management for enhanced data flow and application stability</li>
+          <li>Developed REST APIs using Nest JS framework</li>
+          <li>Worked in Agile environment</li>
         </ul>
-        <h4>Technologies:</h4> <p>Angular, HTML, CSS, Git, Java, Spring Boot, Restful Web services.</p>
+        <h4>Technologies:</h4> <p>Angular 10 & 14, HTML5, SCSS, Git, NGRX, TypeScript, NPM, Nest JS, Jest, JSON, AWS, CI/CD Jenkins.</p>
       </div>
       <div class="resume-item">
-        <h4>Deloitte India Pvt Ltd</h4>
-        <h5>Oct 2019 - Present</h5>
-        <p><em>Hyderabad, India</em></p>
+        <p style="font-weight: 500">Transamerica (Public Web)</p>
         <ul class="roles-details">
-          <li>Working on the frontend of the website, to make the application attractive to the user</li>
-          <li>Implementing new features, tests, refactoring old and redundant code, all independently</li>
-          <li>Wrote highly reusable code for to increase performance of the website</li>
-          <li>Made complete Billing module to charge customers on the basis of the number of active users</li>
-          <li>Helped other teams in the project to solve their complex problems in UI</li>
-          <li>Worked as SME in the project</li>
-          <li>Worked closely with the clients on daily basis to get the requirements and develop the project</li>
+          <li>Created responsive web designs using Angular Material</li>
+          <li>Collaborated with cross-functional teams to troubleshoot and resolve UI issues, ensuring optimal performance</li>
+          <li>Developed UI using Angular, taking reference from Figma screen designs provided by the client</li>
+          <li>Worked on production defect fixing</li>
+          <li>Developed Angular web pages and tested using different browsers</li>
+          <li>Worked in Kanban environment</li>
         </ul>
-        <h4>Technologies:</h4> <p>Angular, HTML, CSS, Git, Patternlabs, Tridion, JavaScript, Jquery, Gulp, Babel.</p>
+        <h4>Technologies:</h4>
+        <p>Angular 8, Redux, HTML5, SCSS, Git, TypeScript, NPM, Nest JS, Karma, AWS, CI/CD Jenkins.</p>
+        <h4>Tools:</h4>
+        <p>GIT, Bitbucket, JIRA, VS Code, Swagger, Figma</p>
+      </div>
+      <div class="resume-item">
+        <h4 style="color: #FFDF6C; font-weight: 500;">Hexaware Technologies</h4>
+        <h5><em>Nov 2017 - Sep 2019</em></h5>
+        <p><em>Chennai, India </em></p>
+        <ul class="roles-details">
+          <li>Created and performed defect fixes for Rest APIs in Spring boot framework</li>
+          <li>Designed UI with Angular 6, HTML5/CSS taking design from Invision App provided by client</li>
+          <li>Helped QA team in testing the new features release</li>
+          <li>I have been part of code refactor team where I have optimized the existing code to make it more understandable and reusable</li>
+          <li>Improved user interfaces by updating menus to be more intuitive</li>
+          <li>Workedin Agile environment and having Software Development Life Cycles (SDLC)</li>
+          <li>Collaborating with developers across multiple teams to develop and build consensus on common reusable application components</li>
+        </ul>
+        <h4>Technologies:</h4> <p>Angular 6, HTML5, SCSS, Git, Java 8, Spring Boot, Restful Web services.</p>
       </div>
     </div>
   </div>
-  <button class="navigation-down-btn about-btn" (click)="scrollToView(contact)"><mat-icon class="side-menu-icon icon-size bounce">expand_more</mat-icon></button>
+  <!-- <button class="navigation-down-btn about-btn" (click)="scrollToView(contact)"><mat-icon class="side-menu-icon icon-size bounce">expand_more</mat-icon></button> -->
 </div>
-<div class="child-container2" [ngStyle]="{'height.px': screenHeight}" #contact>
+<div class="app-info">
+  <p>© Build with Angular 16, 2023</p>
+</div>
+<!-- <div class="child-container2" [ngStyle]="{'height.px': screenHeight}" #contact>
   <h2 class="title-name">Contact</h2>
   <div class="card-container">
   <mat-card>
@@ -201,7 +233,7 @@
     </div>
   </mat-card>
   </div>
-</div>
+</div> -->
 <app-scroll-to-top></app-scroll-to-top>
 
 </mat-drawer-container>

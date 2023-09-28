@@ -18,6 +18,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import {NgxTypedJsModule} from 'ngx-typed-js';
 
 const animate = [HomeComponent];
 @NgModule({
@@ -44,7 +45,8 @@ const animate = [HomeComponent];
     MatCardModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    NgxTypedJsModule,
   ]
 })
 export class HomeModule { }
