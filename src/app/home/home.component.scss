@@ -47,13 +47,13 @@ body {
 }
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   40% {
-    transform: translateX(-30px);
+    transform: translateY(-30px);
   }
   60% {
-    transform: translateX(-15px);
+    transform: translateY(-15px);
   }
 }
 .navigation-down-btn {
@@ -61,8 +61,8 @@ body {
   outline: none;
   background: transparent;
   border: none;
-  transform: rotate(90deg);
-  left: 55%;
+  // transform: rotate(90deg);
+  left: 45%;
   bottom: 3%;
   cursor: pointer;
   color: #007CC7;
@@ -103,14 +103,36 @@ body {
   left: 45% !important;
 }
 .btn-primary {
-  width: 100%;
+  width: 100% !important;
   top: 2%;
   border-radius: unset;
+  font-size: 1.3rem;
+}
+
+.btn-primary:after {    
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #FFDF6C;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.btn-primary:hover:after { 
+  width: 90%; 
+  left: 1rem; 
 }
 
 .name-cont {
   z-index: 10;
   font-size: 1.3em;
+  @media (max-width: 1024px){
+    font-size: 1em;
+  }
 
   .name-text {
     color: #FFDF6C;
@@ -139,9 +161,17 @@ mat-sidenav {
 }
 
 .sidenav-link {
+  // display: inline-block;
+  // padding-bottom: 2px;
+  // background-image: linear-gradient(#ffffff 0 0);
+  // background-position: right -100% bottom 0;
+  // background-size: 200% 2px;
+  // background-repeat: no-repeat;
   &:hover,
   &:focus {
     .menu-title::after {width: 100%}
+    // background-position: left -100% bottom 0;
+    // transition: background-position 0.5s;
   }
 }
 .menu-title {
@@ -150,12 +180,13 @@ mat-sidenav {
   position: relative;
   display: inline-block;
   margin: 0 0 0 0;
+  vertical-align: text-bottom;
 
   &:after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -4px;
+    bottom: 0;
     width: 0;
     border-bottom: 2px solid #FFDF6C;
     transition: .4s width;
@@ -214,6 +245,8 @@ mat-grid-list {
   position: relative;
   width: 100%;
   height: 100vh;
+  background: #3b3b3b;
+  color: white;
 
   .info-container {
     height: 60%;
@@ -255,6 +288,7 @@ mat-grid-list {
 .work-container {
   position: relative;
   width: 100%;
+  color: #ffffff;
 
   h2::after {
     content: '';
@@ -312,7 +346,7 @@ mat-grid-list {
 .child-container2 {
   width: 100%;
   position: relative;
-  background: #ffffff;
+  background: #dfdfdf;
   color: #3F3F3F;
 
   h2::after {
@@ -513,4 +547,16 @@ mat-grid-list {
     border-radius: 50%;
     border: 5px solid #2c2f3f;
   }
+}
+
+.mat-mdc-progress-bar[_ngcontent-ng-c3156616962] {
+  --mdc-linear-progress-active-indicator-color: #1829c2;
+  --mdc-linear-progress-track-color: rgba(194, 24, 91, 0.25);
+}
+.mat-drawer-container {
+  background-color: #3b3b3b !important;
+}
+
+::ng-deep .mat-mdc-icon-button .mat-mdc-button-persistent-ripple {
+  border-radius: unset !important;
 }

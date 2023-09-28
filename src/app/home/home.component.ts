@@ -12,11 +12,23 @@ import {interval, Subject, timer} from 'rxjs';
 import {MatSidenav} from '@angular/material/sidenav';
 import {takeUntil} from 'rxjs/operators';
 import AOS from 'aos';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger("myAnimationTrigger", [
+      state('shown', style({
+        transform: 'translateY(0%)'}),
+      ), state('hidden', style({
+        transform: 'translateY(100%)', display:'none', opacity: 0})
+      ), transition('hidden => shown', [
+        animate('.5s ease-in', style({ transform: 'translateX(0%)' }))
+      ]),
+    ])
+  ]
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -24,15 +36,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public showClose = false;
   public list = ['I develop cool websites', 'I develop Responsive Website'];
   public sk = [
-    { name: 'Angular', level: 80 }, { name: 'HTML', level: 80 }, { name: 'CSS', level: 80 },
-    { name: 'JavaScript', level: 70 }, { name: 'Java', level: 70 }, { name: 'Jquery', level: 70 },
-    { name: 'SpringBoot', level: 60 }, { name: 'MongoDB', level: 30 }, { name: 'MySQL', level: 40 },
-    { name: 'Karma', level: 70 }, { name: 'Jest', level: 80 },
+    { name: 'Angular', level: 80 }, { name: 'HTML5', level: 80 }, { name: 'SCSS', level: 80 },
+    { name: 'JavaScript', level: 70 }, { name: 'Nest JS', level: 70 }, { name: 'AWS', level: 40 },
+    { name: 'MySQL', level: 40 }, { name: 'Karma', level: 70 }, { name: 'Jest', level: 80 },
     { name: 'JIRA ', level: 90 }, { name: 'GIT ', level: 90 }, { name: 'IntelliJ ', level: 95 },
-    { name: 'Visual Studio Code ', level: 95 }, { name: 'Restful Web services ', level: 80 },
-    { name: 'Micro Services ', level: 70 }, { name: 'Jenkins', level: 60 },
-    { name: 'Postman', level: 90 }, { name: 'Redux', level: 90 }, { name: 'Agile', level: 90 },
-    { name: 'Intellij', level: 90 }, {name: 'SonarQube', level: 70}, {name: 'Heroku', level: 70}
+    { name: 'Restful Web services ', level: 80 }, { name: 'Jenkins', level: 60 },
+    { name: 'Postman', level: 90 }, { name: 'Redux', level: 90 }, { name: 'Agile', level: 90 }
   ];
   @ViewChild('home') homeElement: ElementRef | undefined;
   @ViewChild('about') aboutElement: ElementRef | undefined;
@@ -56,6 +65,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public screenWidth = 0;
   public screenHeight = 0;
   public menuColor: string = '';
+  public textState: string = 'hidden';
   public showName = true;
   private killTrigger: Subject<void> = new Subject();
   private refreshInterval$ = timer(0, 1500).pipe(
@@ -63,16 +73,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ).subscribe((datas: any) => {
       const name = this.nameTextElement?.nativeElement;
       if (name && name.innerText === 'Rishi Shrivastava') {
-        name.innerHTML = `<span data-aos="fade-right" class="name-text" style="color: #FFDF6C">Download CV</span>`;
+        name.innerHTML = `<span class="name-text" style="color: #FFDF6C">Download Resume</span>`;
       } else {
-        name.innerHTML = `<span data-aos="fade-right" class="name-text" style="color: #FFDF6C">Rishi Shrivastava</span>`;
+        name.innerHTML = `<span class="name-text" style="color: #FFDF6C">Rishi Shrivastava</span>`;
       }
   });
   constructor(private renderer: Renderer2) {
-    this.startTimer(10);
-    this.screenWidth = window.innerWidth;
-    this.screenHeight = window.innerHeight;
+    // this.startTimer(10);
+    // this.screenWidth = window.innerWidth;
+    // this.screenHeight = window.innerHeight;
+    AOS.init({disable: 'mobile'});
+    AOS.refresh();
   }
+  
   public startTimer(seconds: number): void {
     const time = seconds;
     const timer$ = interval(1000);
@@ -93,8 +106,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
   ngOnInit(): void {
-    AOS.init({disable: 'mobile'});//AOS - 2
-    AOS.refresh();//refresh method is called on window resize and so on, as it doesn't require to build new store with AOS elements and should be as light as possible.
+    this.startTimer(10);
+    this.screenWidth = window.innerWidth;
+    this.screenHeight = window.innerHeight;
   }
 
   ngOnDestroy(): void {
@@ -138,6 +152,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.skillsOffset = this.skillsElement?.nativeElement.offsetTop;
     this.workekOffset = this.workexElement?.nativeElement.offsetTop;
     this.contactOffset = this.contactElement?.nativeElement.offsetTop;
+    setTimeout( () => {
+      this.textState = 'shown';
+    }, 200);
   }
 
   public scrollToView(el: HTMLElement): void {
@@ -154,10 +171,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public composeEmail(): void {
     document.location.href = 'mailto:rishishri07@gmail.com? target="_top';
   }
-  public doLogin() {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+  this.screenWidth = event.target.innerWidth;
+  // this.screenWidth = window.innerWidth;
+  this.screenHeight = window.innerHeight;
+  AOS.init({disable: 'mobile'});//AOS - 2
+  AOS.refresh();
   }
-
   private getMenuColor(): string {
     return 'menu-color';
   }
