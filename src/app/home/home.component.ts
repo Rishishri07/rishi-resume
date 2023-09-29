@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.startTimer(10);
     // this.screenWidth = window.innerWidth;
     // this.screenHeight = window.innerHeight;
-    AOS.init({disable: 'mobile'});
+    AOS.init();
     AOS.refresh();
   }
   
@@ -103,9 +103,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  public toggleMenu(event: any): void {
-
-  }
   ngOnInit(): void {
     this.startTimer(10);
     this.screenWidth = window.innerWidth;
@@ -179,10 +176,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   this.screenWidth = event.target.innerWidth;
   // this.screenWidth = window.innerWidth;
   this.screenHeight = window.innerHeight;
-  AOS.init({disable: 'mobile'});//AOS - 2
+  // AOS.init();
   AOS.refresh();
-  }
-  private getMenuColor(isDarkMenu: boolean): string {
-    return 'menu-color';
   }
 }

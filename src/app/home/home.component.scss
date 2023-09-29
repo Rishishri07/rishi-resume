@@ -307,7 +307,7 @@ mat-grid-list {
   .resume-container {
     display: flex;
     .resume-child-container {
-      width: 50%;
+      width: 100%;
     }
     .resume-title {
       font-size: 26px;
@@ -352,6 +352,7 @@ mat-grid-list {
   position: relative;
   background: #dfdfdf;
   color: #3F3F3F;
+  height: 100vh;
 
   h2::after {
     content: '';

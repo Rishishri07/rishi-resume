@@ -98,7 +98,7 @@
   </div>
   <button class="navigation-down-btn about-btn" (click)="scrollToView(skills)"><mat-icon class="side-menu-icon icon-size bounce">expand_more</mat-icon></button>
 </div>
-<div class="child-container2" style="overflow: auto" [ngStyle]="{'min-height.px': screenHeight}" #skills>
+<div class="child-container2" #skills>
   <h2 class="title-name">Skills</h2>
   <mat-grid-list cols="2" rowHeight="48px" [attr.data-aos]="screenWidth > 768 ? 'fade-up' : null" [attr.data-aos-delay]="screenWidth > 768 ? '200' : null">
     <mat-grid-tile *ngFor="let s of sk; let i = index">
